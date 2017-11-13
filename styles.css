@@ -1,0 +1,8 @@
+h1, #timer, #input {
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+#timer {
+    font-size: 72px;
+}
