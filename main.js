@@ -17,7 +17,7 @@ $(document).ready(function () {
     var reset = document.getElementById("reset");
     var resetClicked = false;
 
-    var count;
+    var count = 0;
     var timerIsOn = false;
 
     const WORK_DEFAULT = 1;
@@ -28,82 +28,48 @@ $(document).ready(function () {
     breakInput.value = BREAK_DEFAULT;
   
     // when user clicks START, start clock
-    timerDisplay.addEventListener("click", startClock);
+    timerDisplay.addEventListener("click", handleTimerClick);
 
     // when user clicks RESET, start clock from defaults
-    reset.addEventListener("click", clickReset);
+    //reset.addEventListener("click", clickReset);
 
-    function clickReset(){
+    /*function clickReset(){
         timerIsOn = false;
+    }*/
+
+    var myInterval = 500;
+
+    function handleTimerClick(){
+        // if the timer isn't on and it's the first session, start the clock
+        if (!timerIsOn && count === 0){
+            timerIsOn = true;
+            countdown();
+        // if the clock is running, pause
+        } else if (timerIsOn){
+            timerIsOn = false;
+        } else if (!timerIsOn && count > 0){
+            timerIsOn = true;
+            countdown();
+        }
     }
 
-    function startClock(){
-        console.log("start clicked");
+    /*function startClock(){
         var minutes = workInput.value;
         var seconds = 0;
-        var itsWorkTime = true;
-        var myInterval = 500;
         
         timerIsOn = true;
 
-        if (timerIsOn){
-            timerDisplay.removeEventListener("click", startClock);
+        /*if (timerIsOn){
+            //timerDisplay.removeEventListener("click", startClock);
             //reset.removeEventListener("click", startClock);
             timerDisplay.addEventListener("click", pauseClock);
-        }
+        }*/
 
         // fires the countdown function at interval
-        setTimeout(countdown, myInterval);
+        //setTimeout(countdown, myInterval);
 
-        function countdown() {
 
-            // check for pause condition
-            if (!timerIsOn){
-                return;
-            }
-            
-            if (itsWorkTime){
-               $(breakInput).removeClass("green");
-               $(workInput).addClass("red");
-            } else {
-                $(workInput).removeClass("red");
-                $(breakInput).addClass("green");
-            }
-
-            if (minutes === 0 && seconds === 0) {
-                // play chime at end of current timer
-                document.getElementById("sound").play();
-
-                // when one timer finishes, set timer to the next
-                if (itsWorkTime){
-                    minutes = breakInput.value;
-                    itsWorkTime = false;    
-                } else {
-                    minutes = workInput.value;
-                    itsWorkTime = true;
-                }
-            }       
-
-            // format timer display
-            if (seconds < 10) {
-                timerDisplay.innerHTML = minutes + ":0" + seconds;
-            } else {
-                timerDisplay.innerHTML = minutes + ":" + seconds;
-            }
-
-            // decrement to 59s to roll over the minute
-            if (seconds === 0 && minutes >= 1) {
-                seconds = 59;
-                minutes = minutes - 1;
-            } else {
-                seconds = seconds - 1;
-            }        
-
-            setTimeout(countdown, myInterval);           
-            
-        }
-
-        function pauseClock(){
+        /*function pauseClock(){
             timerIsOn = false;
             //timerDisplay.removeEventListener("click", pauseClock);
             //timerDisplay.addEventListener("click", resumeClock);
@@ -116,6 +82,61 @@ $(document).ready(function () {
             //timerDisplay.addEventListener("click", pauseClock);
             countdown();
         }
+    }*/
+
+    var minutes = workInput.value;
+    var seconds = 0;
+    var itsWorkTime = true;
+
+    function countdown() {
+
+        // check for pause condition
+        if (!timerIsOn){
+            return;
+        }
+
+        if (itsWorkTime){
+           $(breakInput).removeClass("green");
+           $(workInput).addClass("red");
+        } else {
+            $(workInput).removeClass("red");
+            $(breakInput).addClass("green");
+        }
+
+        if (minutes === 0 && seconds === 0) {
+            // play chime at end of current timer
+            document.getElementById("sound").play();
+
+            // when one timer finishes, set timer to the next
+            if (itsWorkTime){
+                minutes = breakInput.value;
+                itsWorkTime = false;    
+            } else {
+                minutes = workInput.value;
+                itsWorkTime = true;
+            }
+        }       
+
+        // format timer display
+        if (seconds < 10) {
+            timerDisplay.innerHTML = minutes + ":0" + seconds;
+        } else {
+            timerDisplay.innerHTML = minutes + ":" + seconds;
+        }
+
+        // decrement to 59s to roll over the minute
+        if (seconds === 0 && minutes >= 1) {
+            seconds = 59;
+            minutes = minutes - 1;
+        } else {
+            seconds = seconds - 1;
+        }   
+        
+        count += 1;
+        console.log("count: " + count);
+
+        setTimeout(countdown, myInterval);           
+        
     }
 
 });
