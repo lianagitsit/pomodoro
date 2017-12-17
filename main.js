@@ -8,53 +8,98 @@
 */
 
 $(document).ready(function () {
-    console.log("Okay I'm ready");
 
-    var timer = document.getElementById("timer");
-    var userInput = document.getElementById("userInput");
+    var timerDisplay = document.getElementById("timerDisplay");
+    var workInput = document.getElementById("workInput");
+    var breakInput = document.getElementById("breakInput");
+    var message = document.getElementById("message");
+    var count;
+    var timerIsOn = false;
 
-    var minutes = userInput.value;
+    const WORK_DEFAULT = 1;
+    const BREAK_DEFAULT = 1;
 
-    var seconds = 10;
-    console.log("input: " + userInput);
+    //set default time
+    workInput.value = WORK_DEFAULT;
+    breakInput.value = BREAK_DEFAULT;
+    timerDisplay.textContent = WORK_DEFAULT;
 
-    // listens for user entry into input field and fires timer setting
-    userInput.addEventListener("input", myFunc);
+    // countdown from defaults
+    // when user clicks timer display, start countdown
+    timerDisplay.addEventListener("click", startClock);
 
-    function myFunc(event){
+    function startClock(){
+        var minutes;
+        var seconds;
+        var itsWorkTime = true;
+        var myInterval = 500;
+
+        timerIsOn = true;
+        if (timerIsOn){
+            timerDisplay.removeEventListener("click", startClock);
+            //timerDisplay.addEventListener("click", pauseClock);
+        }
+        
+        minutes = workInput.value;
+        seconds = 0;
+
+        // fires the countdown function every second
+        setTimeout(countdown, myInterval);
+
+        function countdown() {
+
+            if (itsWorkTime){
+                message.innerHTML = "Work :-(";
+            } else {
+                message.innerHTML = "Break :-)";
+            }    
+
+            // when one timer finishes, roll to the next
+            if (minutes === 0 && seconds === 0) {
+                if (itsWorkTime){
+                    minutes = breakInput.value;
+                    itsWorkTime = false;    
+                } else {
+                    minutes = workInput.value;
+                    itsWorkTime = true;
+                }
+                seconds = 0;
+            }       
+
+            // format timer display
+            if (seconds < 10) {
+                timerDisplay.innerHTML = minutes + ":0" + seconds;
+            } else {
+                timerDisplay.innerHTML = minutes + ":" + seconds;
+            }
+
+            if (seconds === 0 && minutes >= 1) {
+                seconds = 59;
+                minutes = minutes - 1;
+            } else {
+                seconds = seconds - 1;
+            }        
+
+            setTimeout(countdown, myInterval);
+            
+            //console.log("Time left: " + minutes + "minutes and " + seconds + " seconds.");
+        }
+
+    }
+
+
+       /* // listens for user entry into input field and fires timer setting
+    workInput.addEventListener("input", myFunc);
+
+    function myFunc(event) {
         // console.log(event);
         console.log("input received: " + event.target.value);
 
         // sets the empty timer space to user's input
         // convert minutes to seconds
         // change this to more secure method
-        timer.innerHTML = minutes;
+        timerDisplay.innerHTML = workInput.value;
     }
+    */
 
-
-    // fires the countdown function every second
-    //var count = setInterval(countdown, 1000);
-
-    function countdown(){
-        // stop the countdown when the timer reaches 0
-        if (minutes === 0 && seconds === 0){
-            clearInterval(count);
-            timer.innerHTML = "Time's up!";
-            return;
-        // roll over from one minute to the next
-        } else if (seconds === 0 && minutes >= 1){
-            seconds = 59;
-            minutes = minutes - 1;
-        }
-
-        // format timer display
-        if (seconds < 10){
-            timer.innerHTML = minutes + ":0" + seconds;                    
-        } else {
-            timer.innerHTML = minutes + ":" + seconds;                    
-        }
-
-        // decrement timer by seconds
-        seconds = seconds - 1;
-    }
 });
