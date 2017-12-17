@@ -25,7 +25,7 @@ $(document).ready(function () {
     //set default time
     workInput.value = WORK_DEFAULT;
     breakInput.value = BREAK_DEFAULT;
-    timerDisplay.textContent = WORK_DEFAULT;
+    //timerDisplay.textContent = WORK_DEFAULT;
 
     // countdown from defaults
     // when user clicks timer display, start countdown

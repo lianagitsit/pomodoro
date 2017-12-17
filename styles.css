@@ -1,6 +1,22 @@
-h1, #timerDisplay {
+h1, #timerDisplay, #time-field-work, #time-field-break {
     text-align: center;
     font-family: Helvetica, Arial, sans-serif;
+}
+
+#time-field {
+    margin: 0 auto;
+    text-align: center;
+}
+
+#time-field-work, #time-field-break {
+    display: inline-block;
+    margin: auto;
+}
+
+.userInput {
+    text-align: center;
+    font-size: 32px;
+    width: 4em;
 }
 
 #timerDisplay {

@@ -4,18 +4,22 @@
         <link rel="stylesheet" href="styles.css">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="main.js"></script>
-        <title>Pomodoro Timer</title>
+        <title>Pomodoro Clock</title>
     </head>
     <body>
         <h1>Pomodoro Clock</h1>
-        <div>
-            <p>Work time (min):</p>
-            <input id="workInput" type="number">
-            <p>Break time (min)</p>
-            <input id="breakInput" type="number">
+        <div id="time-field">
+            <div id="time-field-work">
+                <p>Work time</p>
+                <input class="userInput" id="workInput" type="number">
+            </div>
+            <div id="time-field-break">
+                <p>Break time</p>
+                <input class="userInput" id="breakInput" type="number">
+            </div>
         </div>
         <br /><br />
-        <div id="timerDisplay">time goes here</div>
+        <div id="timerDisplay">start</div>
         <br /><br />
         <div id="message"></div>
         <audio id="sound">
