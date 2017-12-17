@@ -1,4 +1,4 @@
-h1, #timerDisplay, #time-field-work, #time-field-break {
+h1, #timerDisplay, #time-field-work, #time-field-break, #reset {
     text-align: center;
     font-family: Helvetica, Arial, sans-serif;
 }
@@ -16,9 +16,28 @@ h1, #timerDisplay, #time-field-work, #time-field-break {
 .userInput {
     text-align: center;
     font-size: 32px;
-    width: 4em;
+    width: 3em;
+    border-radius: 10px;
+    border-width: medium;
+    border-style: solid;
+    border-color: lightgrey;
 }
 
 #timerDisplay {
     font-size: 72px;
+    cursor: pointer;
+}
+
+#reset {
+    font-size: 20px;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.red {
+    border-color: red;
+}
+
+.green {
+    border-color: limegreen;
 }

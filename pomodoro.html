@@ -10,18 +10,19 @@
         <h1>Pomodoro Clock</h1>
         <div id="time-field">
             <div id="time-field-work">
-                <p>Work time</p>
-                <input class="userInput" id="workInput" type="number">
+                <p>work time</p>
+                <input class="userInput" id="workInput" type="number" min="1">
             </div>
             <div id="time-field-break">
-                <p>Break time</p>
-                <input class="userInput" id="breakInput" type="number">
+                <p>break time</p>
+                <input class="userInput" id="breakInput" type="number" min="1">
             </div>
         </div>
+        <div id="message"></div>
         <br /><br />
         <div id="timerDisplay">start</div>
         <br /><br />
-        <div id="message"></div>
+        <div id="reset">reset</div>
         <audio id="sound">
             <source src="wind-chime-2.mp3" type="audio/mpeg">
         </audio>
