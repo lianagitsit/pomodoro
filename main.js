@@ -19,6 +19,9 @@ $(document).ready(function () {
     const WORK_DEFAULT = 1;
     const BREAK_DEFAULT = 1;
 
+    // create sound object
+    //var timesUpSound = new Audio("wind-chime-2.mp3");
+
     //set default time
     workInput.value = WORK_DEFAULT;
     breakInput.value = BREAK_DEFAULT;
@@ -56,6 +59,8 @@ $(document).ready(function () {
 
             // when one timer finishes, roll to the next
             if (minutes === 0 && seconds === 0) {
+                document.getElementById("sound").play();
+                //timesUpSound.play();
                 if (itsWorkTime){
                     minutes = breakInput.value;
                     itsWorkTime = false;    
@@ -63,7 +68,6 @@ $(document).ready(function () {
                     minutes = workInput.value;
                     itsWorkTime = true;
                 }
-                seconds = 0;
             }       
 
             // format timer display
@@ -73,6 +77,7 @@ $(document).ready(function () {
                 timerDisplay.innerHTML = minutes + ":" + seconds;
             }
 
+            // decrement to 59s to roll over the minute
             if (seconds === 0 && minutes >= 1) {
                 seconds = 59;
                 minutes = minutes - 1;
