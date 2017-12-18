@@ -1,4 +1,4 @@
-h1, #timerDisplay, #time-field-work, #time-field-break, #reset {
+h1, #timerDisplay, #time-field-work, #time-field-break, #reset, #message {
     text-align: center;
     font-family: Helvetica, Arial, sans-serif;
 }
@@ -32,6 +32,17 @@ h1, #timerDisplay, #time-field-work, #time-field-break, #reset {
     font-size: 20px;
     cursor: pointer;
     visibility: hidden;
+    border-radius: 10px;
+    margin: auto;
+    display: block;
+}
+
+#message {
+    color: red;
+    margin-top: 10px;
+    font-size: 12px;
+    font-style: italic;
+    height: 1.1em;
 }
 
 .red {
