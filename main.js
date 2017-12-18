@@ -15,6 +15,7 @@ $(document).ready(function () {
     var breakInput = document.getElementById("breakInput");
     var message = document.getElementById("message");
     var reset = document.getElementById("reset");
+    var speed = document.getElementById("speed");
 
     // state variables
     var count;
@@ -23,7 +24,7 @@ $(document).ready(function () {
     var inputIsValid = true;
 
     // clock runtime in milliseconds
-    var myInterval = 50;
+    var myInterval = 1000;
 
     // default session time values
     const WORK_DEFAULT = 25;
@@ -32,6 +33,19 @@ $(document).ready(function () {
     // set clock at start
     var minutes;
     var seconds;
+
+    speed.addEventListener("click", toggleSpeed);
+
+    function toggleSpeed(){
+        if (myInterval === 1000){
+            myInterval = 100;
+            speed.innerHTML = "slower";
+        } else if (myInterval === 100){
+            myInterval = 1000;
+            speed.innerHTML = "faster";
+        }
+        
+    }
     
     // validate that user input is a positive integer
     function validateInput(){
@@ -67,8 +81,9 @@ $(document).ready(function () {
                 breakInput.disabled = true;
                 workInput.disabled = true;
 
-                // show reset button
+                // show reset and speed buttons
                 reset.style.visibility = "visible";
+                speed.style.visibility = "visible";
 
                 // set minutes to work input
                 minutes = workInput.value;
@@ -108,6 +123,10 @@ $(document).ready(function () {
 
         timerDisplay.innerHTML = "start";
         reset.style.visibility = "hidden";
+        speed.style.visibility = "hidden";
+
+        myInterval = 1000;
+        speed.innerHTML = "faster";
 
         $(breakInput).removeClass("green");
         $(workInput).removeClass("red");

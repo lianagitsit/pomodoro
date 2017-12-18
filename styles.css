@@ -28,13 +28,24 @@ h1, #timerDisplay, #time-field-work, #time-field-break, #reset, #message {
     cursor: pointer;
 }
 
-#reset {
-    font-size: 20px;
+.wrapper {
+    margin-top: 10px;
+}
+
+#reset, #speed {
     cursor: pointer;
-    visibility: hidden;
     border-radius: 10px;
     margin: auto;
     display: block;
+    visibility: hidden;
+}
+
+#reset {
+    font-size: 20px;
+}
+
+#speed {
+    font-size: 16px;
 }
 
 #message {
