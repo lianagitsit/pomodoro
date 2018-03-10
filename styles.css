@@ -1,3 +1,11 @@
+#main-wrapper {
+    border: 5px solid lightgrey;
+    border-radius: 20px;
+    width: 25%;
+    margin: 50px auto;
+    padding-bottom: 20px;
+}
+
 h1, #timerDisplay, #time-field-work, #time-field-break, #reset, #message {
     text-align: center;
     font-family: Helvetica, Arial, sans-serif;
