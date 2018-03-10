@@ -1,5 +1,7 @@
 # Pomodoro Timer
 
+See it live here: https://lianagitsit.github.io/pomodoro/
+
 <img src="pomodoro-ss.png" width="300">
 
 A pomodoro timer made with JavaScript, HTML, and CSS.
